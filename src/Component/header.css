@@ -1,0 +1,13 @@
+.header {
+	background: linear-gradient(to bottom, #ffffffc7, #ffffffd7),
+		url("../assets/medicare.jpg");
+	height: 100vh;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+@media (max-width: 1024px) {
+	.header {
+		height: auto;
+	}
+}
