@@ -10,7 +10,7 @@ const Home = () => {
 			<Header />
 			<div className="container mx-auto py-24 px-10 sm:px-8 md:px-6 lg:px-10">
 				<div className="flex items-center justify-between text-black  pb-8">
-					<select className="select w-full max-w-xs bg-white">
+					<select className="select w-full max-w-xs border bg-white">
 						<option selected>All</option>
 						<option>chicken</option>
 						<option>foods</option>
@@ -23,7 +23,7 @@ const Home = () => {
 						{/* {sort ? <AiOutlineArrowUp /> : <AiOutlineArrowDown />} */}
 					</button>
 				</div>
-				<div className="grid 2xl:grid-cols-6 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-4 ">
+				<div className="grid 2xl:grid-cols-6 xl:grid-cols-5 lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-4 ">
 					<div className="card h-full bg-white w-full shadow-sm rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg  border p-3">
 						<div className="relative">
 							<Link to="/">
