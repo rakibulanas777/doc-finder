@@ -225,9 +225,16 @@ const Navbar = () => {
                       {user.user.name}
                     </div>
                   </NavLink>
+                  {user.user.isAdmin && (
+                    <NavLink to="/notification">
+                      <div className="cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-neutral">
+                        notification
+                      </div>
+                    </NavLink>
+                  )}
                   <div>
                     <a
-                      className="justify-between"
+                      className="cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-neutral"
                       onClick={() => {
                         toast.success("Logout Successfully");
                         localStorage.clear();

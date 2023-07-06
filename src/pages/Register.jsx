@@ -18,7 +18,7 @@ const Register = () => {
     const passwordConfrim = form.confrimPassword.value;
     const userData = { name, email, password, passwordConfrim };
 
-    fetch("http://localhost:8000/api/v1/user/register", {
+    fetch("https://doc-finder.onrender.com/api/v1/user/register", {
       method: "POST",
       headers: {
         "content-type": "application/json",

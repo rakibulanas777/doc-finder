@@ -19,7 +19,7 @@ function ApplyDoctor() {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/apply-doctor",
+        "https://doc-finder.onrender.com/api/v1/user/apply-doctor",
         {
           ...values,
           userId: user._id,
