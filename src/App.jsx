@@ -9,6 +9,8 @@ import Contact from "./pages/Contact";
 import Register from "./pages/Register";
 import PublicRoute from "./Component/PublicRoute";
 import ProtectedRoute from "./Component/ProtectedRoute";
+import ApplyDoctor from "./pages/ApplyDoctor";
+import NotificationPage from "./pages/NotificationPage";
 
 function App() {
   return (
@@ -25,7 +27,22 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/about" element={<About />} />
+          <Route
+            path="/applydoctor"
+            element={
+              <ProtectedRoute>
+                <ApplyDoctor />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/notification"
+            element={
+              <ProtectedRoute>
+                <NotificationPage />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/appointment"
             element={

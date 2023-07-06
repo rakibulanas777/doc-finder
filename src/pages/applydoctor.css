@@ -1,0 +1,7 @@
+.applydoctor {
+  background: linear-gradient(to bottom, #ffffffc7, #ffffffd7),
+    url("../assets/medicare.jpg");
+  height: 110vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

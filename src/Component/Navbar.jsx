@@ -149,13 +149,16 @@ const Navbar = () => {
                     </li>
                   </ul>
                 </div>
-
-                <div className="indicator">
-                  <span className="indicator-item badge badge-secondary">
-                    99+
-                  </span>
-                  <button className="btn">inbox</button>
-                </div>
+                {user.user.isAdmin && (
+                  <NavLink to="/notification">
+                    <div className="indicator">
+                      <span className="indicator-item badge badge-secondary">
+                        {user.user.notification.length}
+                      </span>
+                      <button className="btn">notification</button>
+                    </div>
+                  </NavLink>
+                )}
               </>
             ) : (
               <div className="flex space-x-4">
@@ -233,13 +236,6 @@ const Navbar = () => {
                     >
                       Logout
                     </a>
-                  </div>
-
-                  <div className="indicator">
-                    <span className="indicator-item badge badge-secondary">
-                      99+
-                    </span>
-                    <button className="btn">inbox</button>
                   </div>
                 </>
               ) : (
