@@ -5,17 +5,17 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import logo from "../assets/logo.svg";
 import "./login.css";
-import { useUserContext } from "../context/userContext";
+// import { useUserContext } from "../context/userContext";
 const Login = () => {
   const navigate = useNavigate();
-  const { getUser } = useUserContext();
+  // const { getUser } = useUserContext();
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     const loginData = { email, password };
 
-    fetch("http://localhost:8000/api/v1/user/login", {
+    fetch("https://doc-finder.onrender.com/api/v1/user/login", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -27,7 +27,7 @@ const Login = () => {
         if (data.success) {
           localStorage.setItem("token", data.data.token);
           toast.success(data.message);
-          getUser(data);
+          // getUser(data);
           e.target.reset();
           navigate("/");
         } else {

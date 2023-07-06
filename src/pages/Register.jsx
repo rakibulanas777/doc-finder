@@ -5,10 +5,10 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import logo from "../assets/logo.svg";
 import "./register.css";
-import { useUserContext } from "../context/userContext";
+// import { useUserContext } from "../context/userContext";
 const Register = () => {
   const navigate = useNavigate();
-  const { getUser } = useUserContext();
+  // const { getUser } = useUserContext();
   const handleOnSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -18,7 +18,7 @@ const Register = () => {
     const passwordConfrim = form.confrimPassword.value;
     const userData = { name, email, password, passwordConfrim };
 
-    fetch("http://localhost:8000/api/v1/user/register", {
+    fetch("https://doc-finder.onrender.com/api/v1/user/register", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -32,7 +32,7 @@ const Register = () => {
           toast.success(data.message);
 
           form.reset();
-          getUser(data);
+          // getUser(data);
           navigate("/");
         } else {
           toast.error(data.message);
