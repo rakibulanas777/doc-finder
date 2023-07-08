@@ -1,15 +1,18 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Component/Header";
 import { AiOutlinePlus } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import doctor from "../assets/doctor.png";
 import axios from "axios";
+import { Row } from "antd";
+import DoctorList from "./DoctorList";
 const Home = () => {
+  const [doctors, setDoctors] = useState([]);
   const getUserData = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/getUserData",
+        "http://localhost:8000/api/v1/user/getAllDoctors",
         {},
         {
           headers: {
@@ -17,6 +20,9 @@ const Home = () => {
           },
         }
       );
+      if (res.data.success) {
+        setDoctors(res.data.data);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -25,6 +31,7 @@ const Home = () => {
   useEffect(() => {
     getUserData();
   }, []);
+  console.log(doctors);
   return (
     <div className="home">
       <Header />
@@ -43,6 +50,12 @@ const Home = () => {
             {/* {sort ? <AiOutlineArrowUp /> : <AiOutlineArrowDown />} */}
           </button>
         </div>
+
+        <Row>
+          {doctors.map((doctor) => (
+            <DoctorList doctor={doctor} />
+          ))}
+        </Row>
         <div className="grid 2xl:grid-cols-6 xl:grid-cols-5 lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-4 ">
           <div className="card h-full bg-white w-full shadow-sm rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg  border p-3">
             <div className="relative">

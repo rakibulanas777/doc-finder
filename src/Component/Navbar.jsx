@@ -52,7 +52,7 @@ const Navbar = () => {
     {
       name: "Appointment",
       id: 1,
-      path: "/appointment",
+      path: "/doctor/appoinment",
     },
 
     {
