@@ -17,6 +17,9 @@ const Navbar = () => {
   const handleNav = () => {
     setNav(!nav);
   };
+
+  const { user } = useSelector((state) => state.user);
+  console.log(user);
   const navItem = [
     {
       name: "Home",
@@ -33,15 +36,29 @@ const Navbar = () => {
       id: 4,
       path: "/applydoctor",
     },
-    {
-      name: "About",
-      id: 2,
-      path: "/about",
-    },
+
     {
       name: "Profile",
       id: 3,
-      path: "/profile",
+      path: `/profile`,
+    },
+  ];
+  const navItemDoctor = [
+    {
+      name: "Home",
+      id: 0,
+      path: "/",
+    },
+    {
+      name: "Appointment",
+      id: 1,
+      path: "/appointment",
+    },
+
+    {
+      name: "Profile",
+      id: 3,
+      path: `/doctor/profile/${user?.user?._id}`,
     },
   ];
   const navItemAdmin = [
@@ -53,12 +70,12 @@ const Navbar = () => {
     {
       name: "Doctor",
       id: 4,
-      path: "/doctor",
+      path: "/admin/doctors",
     },
     {
       name: "Users",
       id: 2,
-      path: "/users",
+      path: "/admin/users",
     },
     {
       name: "Profile",
@@ -66,8 +83,7 @@ const Navbar = () => {
       path: "/profile",
     },
   ];
-  const { user } = useSelector((state) => state.user);
-  console.log(user);
+
   return (
     <div className="nav fixed top-0 left-0 w-full z-10 ease-in duration-300 shadow-sm backdrop-blur-md bg-white/80">
       <div className="container mx-auto py-6 px-10 sm:px-8 md:px-6 lg:px-10">
@@ -90,6 +106,21 @@ const Navbar = () => {
               <>
                 {user.user.isAdmin
                   ? navItemAdmin.map((item) => (
+                      <NavLink
+                        key={item.id}
+                        to={item.path}
+                        onClick={() => setActive(item.id)}
+                        className={
+                          active === item.id
+                            ? "cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-primary"
+                            : "cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-neutral hover:text-primary"
+                        }
+                      >
+                        {item.name}
+                      </NavLink>
+                    ))
+                  : user.user.isDoctor
+                  ? navItemDoctor.map((item) => (
                       <NavLink
                         key={item.id}
                         to={item.path}
@@ -149,16 +180,15 @@ const Navbar = () => {
                     </li>
                   </ul>
                 </div>
-                {user.user.isAdmin && (
-                  <NavLink to="/notification">
-                    <div className="indicator">
-                      <span className="indicator-item badge badge-secondary">
-                        {user.user.notification.length}
-                      </span>
-                      <button className="btn">notification</button>
-                    </div>
-                  </NavLink>
-                )}
+
+                <NavLink to="/notification">
+                  <div className="indicator">
+                    <span className="indicator-item badge badge-secondary">
+                      {user.user.notification.length}
+                    </span>
+                    <button className="btn">notification</button>
+                  </div>
+                </NavLink>
               </>
             ) : (
               <div className="flex space-x-4">
@@ -225,13 +255,13 @@ const Navbar = () => {
                       {user.user.name}
                     </div>
                   </NavLink>
-                  {user.user.isAdmin && (
-                    <NavLink to="/notification">
-                      <div className="cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-neutral">
-                        notification
-                      </div>
-                    </NavLink>
-                  )}
+
+                  <NavLink to="/notification">
+                    <div className="cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-neutral">
+                      notification
+                    </div>
+                  </NavLink>
+
                   <div>
                     <a
                       className="cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-neutral"

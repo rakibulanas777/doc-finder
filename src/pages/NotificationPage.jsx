@@ -15,7 +15,7 @@ const NotificationPage = () => {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        "https://doc-finder.onrender.com/api/v1/user/get-all-notification",
+        "http://localhost:8000/api/v1/user/get-all-notification",
         {
           userId: user._id,
         },
@@ -44,7 +44,7 @@ const NotificationPage = () => {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        "https://doc-finder.onrender.com/api/v1/user/delete-all-notification",
+        "http://localhost:8000/api/v1/user/delete-all-notification",
         { userId: user._id },
         {
           headers: {
@@ -81,24 +81,24 @@ const NotificationPage = () => {
                     <div className="avatar hidden md:block">
                       <div className="mask mask-squircle  h-16 cursor-pointer">
                         <img
-                          src={notificationMgs.data.doctor.image}
+                          src={notificationMgs.data?.doctor.image}
                           alt="Avatar Tailwind CSS Component"
                         />
                       </div>
                     </div>
                     <div>
                       <div className="font-bold">
-                        {notificationMgs.data.doctor.name}
+                        {notificationMgs.data?.doctor.name}
                       </div>
                       <div className="text-sm opacity-50">
-                        {notificationMgs.data.doctor.specialization}
+                        {notificationMgs.data?.doctor.specialization}
                       </div>
                     </div>
 
                     <div className="card">
                       <div className="card-text">
                         {" "}
-                        <b>{notificationMgs.data.doctor.name}</b>{" "}
+                        <b>{notificationMgs.data?.doctor.name}</b>{" "}
                         {notificationMgs.message}
                       </div>
                     </div>
@@ -118,23 +118,23 @@ const NotificationPage = () => {
                     <div className="avatar hidden md:block">
                       <div className="mask mask-squircle  h-16 cursor-pointer">
                         <img
-                          src={notificationMgs.data.doctor.image}
+                          src={notificationMgs.data?.doctor.image}
                           alt="Avatar Tailwind CSS Component"
                         />
                       </div>
                     </div>
                     <div className="hidden sm:block">
                       <div className="font-bold">
-                        {notificationMgs.data.doctor.name}
+                        {notificationMgs.data?.doctor.name}
                       </div>
                       <div className="text-sm opacity-50">
-                        {notificationMgs.data.doctor.specialization}
+                        {notificationMgs.data?.doctor.specialization}
                       </div>
                     </div>
 
                     <div className="card">
                       <div className="card-text">
-                        <b>{notificationMgs.data.doctor.name}</b>{" "}
+                        <b>{notificationMgs.data?.doctor.name}</b>{" "}
                         {notificationMgs.message}
                       </div>
                     </div>

@@ -15,7 +15,7 @@ const Login = () => {
     const password = e.target.password.value;
     const loginData = { email, password };
 
-    fetch("https://doc-finder.onrender.com/api/v1/user/login", {
+    fetch("http://localhost:8000/api/v1/user/login", {
       method: "POST",
       headers: {
         "content-type": "application/json",

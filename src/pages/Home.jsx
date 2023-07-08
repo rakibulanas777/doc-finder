@@ -9,7 +9,7 @@ const Home = () => {
   const getUserData = async () => {
     try {
       const res = await axios.post(
-        "https://doc-finder.onrender.com/api/v1/user/getUserData",
+        "http://localhost:8000/api/v1/user/getUserData",
         {},
         {
           headers: {
