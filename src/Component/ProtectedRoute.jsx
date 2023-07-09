@@ -14,7 +14,7 @@ export default function ProtectedRoute({ children }) {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/getUserData",
+        "https://doc-finder.onrender.com/api/v1/user/getUserData",
         { token: localStorage.getItem("token") },
         {
           headers: {

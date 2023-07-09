@@ -19,7 +19,7 @@ function ApplyDoctor() {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/apply-doctor",
+        "https://doc-finder.onrender.com/api/v1/user/apply-doctor",
         {
           ...values,
           userId: user._id,
@@ -55,8 +55,6 @@ function ApplyDoctor() {
           layout="vertical"
           onFinish={handleFinish}
           className="ease-in duration-300 w-[80%] sm:w-[60%]  shadow-sm backdrop-blur-md bg-white/80 lg:w-[50%] mx-auto rounded-md px-8 py-5"
-          
-          
         >
           <NavLink to="/">
             <img

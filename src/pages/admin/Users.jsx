@@ -8,7 +8,7 @@ const Users = () => {
   const getUsers = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/v1/admin/getAllUsers",
+        "https://doc-finder.onrender.com/api/v1/admin/getAllUsers",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

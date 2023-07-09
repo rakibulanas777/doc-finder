@@ -11,7 +11,7 @@ const DoctorAppointments = () => {
   const getAppointments = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/v1/doctor/doctor-appointments",
+        "https://doc-finder.onrender.com/api/v1/doctor/doctor-appointments",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -33,7 +33,7 @@ const DoctorAppointments = () => {
   const handleStatus = async (record, status) => {
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/doctor/update-status",
+        "https://doc-finder.onrender.com/api/v1/doctor/update-status",
         { appointmentsId: record._id, status },
         {
           headers: {
@@ -108,7 +108,9 @@ const DoctorAppointments = () => {
     <>
       <div className="container mx-auto  px-10 sm:px-8 md:px-6 lg:px-10">
         <div className="w-full mx-auto pt-[20vh]">
-          <h1 className="text-2xl font-semibold mx-auto text-center mb-5">Appoinmtnets Lists</h1>
+          <h1 className="text-2xl font-semibold mx-auto text-center mb-5">
+            Appoinmtnets Lists
+          </h1>
           <Table columns={columns} dataSource={appointments} />
         </div>
       </div>

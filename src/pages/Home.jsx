@@ -13,7 +13,7 @@ const Home = () => {
   const getUserData = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/user/getAllDoctors",
+        "https://doc-finder.onrender.com/api/v1/user/getAllDoctors",
         {},
         {
           headers: {
@@ -51,7 +51,7 @@ const Home = () => {
             {/* {sort ? <AiOutlineArrowUp /> : <AiOutlineArrowDown />} */}
           </button>
         </div>
-        
+
         <div className="grid 2xl:grid-cols-3 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4 ">
           {doctors.map((doctor) => (
             <DoctorList doctor={doctor} />
