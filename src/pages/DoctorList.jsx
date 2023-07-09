@@ -1,29 +1,36 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import PrimaryButton from "../Component/shared/PrimaryButton";
 
 const DoctorList = ({ doctor }) => {
   const navigate = useNavigate();
   return (
     <>
-      <div
-        className="card m-2"
-        style={{ cursor: "pointer" }}
-        onClick={() => navigate(`/doctor/book-appointment/${doctor._id}`)}
-      >
-        <div className="card-header">Dr. {doctor.name}</div>
-        <div className="card-body">
+      <div className="backdrop-blur-md bg-white/80 shadow-md p-3 rounded-md flex items-center">
+        <img className="h-48 mx-auto px-3 border-r" src={doctor.image} />
+
+        <div className="flex flex-col space-y-2 pr-4 ">
+          <h3 className="text-gray-900 text-xl font-bold tracking-tight">
+            Dr. {doctor.name}
+          </h3>
+          <hr />
+          <div className="flex items-center justify-between">
+            <div className="text-gray-900 cursor-pointer font-semibold">
+              {doctor.specialization}
+            </div>
+            <span className=" font-bold text-primary">
+              ${doctor.feesPerConsaltation}
+            </span>
+          </div>
           <p>
-            <b>Specialization</b> {doctor.specialization}
+            <b>Timings : </b> {doctor.timings[0]} - {doctor.timings[1]}
           </p>
-          <p>
-            <b>Experience</b> {doctor.experience}
-          </p>
-          <p>
-            <b>Fees Per Cunsaltation</b> {doctor.feesPerCunsaltation}
-          </p>
-          <p>
-            <b>Timings</b> {doctor.timings[0]} - {doctor.timings[1]}
-          </p>
+          <button
+            className="bg-gradient-to-r lowercase from-secondary to-primary btn glass text-white hover:!bg-secondary"
+            onClick={() => navigate(`/doctor/book-appointment/${doctor._id}`)}
+          >
+            booking
+          </button>
         </div>
       </div>
     </>

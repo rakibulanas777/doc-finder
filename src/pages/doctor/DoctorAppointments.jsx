@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import moment from "moment";
-import { message, Table } from "antd";
+import { message, Table, Tag } from "antd";
 
 const DoctorAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -69,6 +69,15 @@ const DoctorAppointments = () => {
     {
       title: "Status",
       dataIndex: "status",
+      render: (text, record) => (
+        <>
+          {record.status === "reject" ? (
+            <Tag color="volcano">{record.status}</Tag>
+          ) : (
+            <Tag color="green">{record.status}</Tag>
+          )}
+        </>
+      ),
     },
     {
       title: "Actions",
@@ -76,15 +85,15 @@ const DoctorAppointments = () => {
       render: (text, record) => (
         <div className="d-flex">
           {record.status === "pending" && (
-            <div className="d-flex">
+            <div className="flex">
               <button
-                className="btn btn-success"
+                className="btn btn-success text-white"
                 onClick={() => handleStatus(record, "approved")}
               >
                 Approved
               </button>
               <button
-                className="btn btn-danger ms-2"
+                className="btn btn-error text-white ms-2"
                 onClick={() => handleStatus(record, "reject")}
               >
                 Reject
@@ -99,7 +108,7 @@ const DoctorAppointments = () => {
     <>
       <div className="container mx-auto  px-10 sm:px-8 md:px-6 lg:px-10">
         <div className="w-full mx-auto pt-[20vh]">
-          <h1>Appoinmtnets Lists</h1>
+          <h1 className="text-2xl font-semibold mx-auto text-center mb-5">Appoinmtnets Lists</h1>
           <Table columns={columns} dataSource={appointments} />
         </div>
       </div>
