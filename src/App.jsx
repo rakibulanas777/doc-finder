@@ -3,9 +3,8 @@ import Navbar from "./Component/Navbar.jsx";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Appoinment from "./pages/Appoinment";
-import About from "./pages/About";
 import Login from "./pages/Login";
-import Contact from "./pages/Contact";
+
 import Register from "./pages/Register";
 import PublicRoute from "./Component/PublicRoute";
 import ProtectedRoute from "./Component/ProtectedRoute";
@@ -16,6 +15,7 @@ import Doctors from "./pages/admin/Doctors";
 import Profile from "./pages/doctor/Profile";
 import BookingPage from "./pages/BookingPage";
 import DoctorAppointments from "./pages/doctor/DoctorAppointments";
+import Footer from "./pages/Footer";
 
 function App() {
   return (
@@ -48,6 +48,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+
           <Route
             path="/doctor/appoinment"
             element={
@@ -96,7 +97,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/contact" element={<Contact />} />
+
           <Route
             path="/login"
             element={
@@ -114,6 +115,7 @@ function App() {
             }
           />
         </Routes>
+        <Footer />
       </div>
     </>
   );

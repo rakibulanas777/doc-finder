@@ -36,12 +36,6 @@ const Navbar = () => {
       id: 4,
       path: "/applydoctor",
     },
-
-    {
-      name: "Profile",
-      id: 3,
-      path: `/profile`,
-    },
   ];
   const navItemDoctor = [
     {
@@ -76,11 +70,6 @@ const Navbar = () => {
       name: "Users",
       id: 2,
       path: "/admin/users",
-    },
-    {
-      name: "Profile",
-      id: 3,
-      path: "/profile",
     },
   ];
 
