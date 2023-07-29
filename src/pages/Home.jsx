@@ -67,7 +67,7 @@ const Home = () => {
           >
             <option selected>All</option>
             <option>General Physician</option>
-            <option>Heart</option>
+            <option>Dermatology</option>
           </select>
           <button className="flex bg-white py-2 px-3 gap-2 items-center rounded-sm font-medium border-white">
             <span className=" font-medium">sort</span>
