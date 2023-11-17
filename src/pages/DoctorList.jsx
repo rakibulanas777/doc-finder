@@ -1,9 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../Component/shared/PrimaryButton";
+import { useSelector } from "react-redux";
 
 const DoctorList = ({ doctor }) => {
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.user);
   return (
     <>
       <div className="backdrop-blur-md bg-white/80 shadow-md p-3 rounded-md flex items-center">
@@ -25,12 +27,20 @@ const DoctorList = ({ doctor }) => {
           <p>
             <b>Timings : </b> {doctor.timings[0]} - {doctor.timings[1]}
           </p>
-          <button
-            className="bg-gradient-to-r lowercase from-secondary to-primary btn glass text-white hover:!bg-secondary"
-            onClick={() => navigate(`/doctor/book-appointment/${doctor._id}`)}
-          >
-            booking
-          </button>
+          {
+            user ? (<button
+              className="bg-gradient-to-r lowercase from-secondary to-primary btn glass text-white hover:!bg-secondary"
+              onClick={() => navigate(`/doctor/book-appointment/${doctor._id}`)}
+            >
+              booking
+            </button>) : (<button
+              className="bg-gradient-to-r lowercase from-secondary to-primary btn glass text-white hover:!bg-secondary"
+              onClick={() => navigate(`/login`)}
+            >
+              booking
+            </button>)
+          }
+
         </div>
       </div>
     </>
