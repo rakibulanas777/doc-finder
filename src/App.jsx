@@ -33,6 +33,14 @@ function App() {
             }
           />
           <Route
+            path="/home"
+            element={
+
+              <Home />
+
+            }
+          />
+          <Route
             path="/applydoctor"
             element={
               <ProtectedRoute>

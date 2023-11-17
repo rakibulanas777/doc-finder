@@ -52,7 +52,7 @@ const Home = () => {
   }, [value]);
 
   console.log(value);
-  console.log(doctors);
+
   // const matched = foods.filter((Food) =>
   //   Food.catagory.toLowerCase().includes(search)
   // );
