@@ -16,8 +16,11 @@ import Profile from "./pages/doctor/Profile";
 import BookingPage from "./pages/BookingPage";
 import DoctorAppointments from "./pages/doctor/DoctorAppointments";
 import Footer from "./pages/Footer";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 function App() {
+  const stripePromise = loadStripe('pk_test_51LM2J1SIiDyURhxDNv1N4eG5FI9FdphG6ukPj3hrrSo6UWrgbl6o0nJqOwemWcbqjlKNBR8nqhl6rnfzz8VK2Sjx00y47ErW1D');
   return (
     <>
       <div data-theme="mytheme">
@@ -68,8 +71,11 @@ function App() {
           <Route
             path="/doctor/book-appointment/:doctorId"
             element={
+
               <ProtectedRoute>
-                <BookingPage />
+                <Elements stripe={stripePromise}>
+                  <BookingPage />
+                </Elements>
               </ProtectedRoute>
             }
           />

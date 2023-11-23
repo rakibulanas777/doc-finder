@@ -19,6 +19,7 @@ const DoctorAppointments = () => {
         }
       );
       if (res.data.success) {
+        console.log(res.data)
         setAppointments(res.data.data);
       }
     } catch (error) {
@@ -26,9 +27,12 @@ const DoctorAppointments = () => {
     }
   };
 
+  console.log(appointments)
+
+
   useEffect(() => {
     getAppointments();
-  }, []);
+  }, [appointments]);
 
   const handleStatus = async (record, status) => {
     try {
@@ -53,8 +57,12 @@ const DoctorAppointments = () => {
 
   const columns = [
     {
-      title: "ID",
+      title: "Name",
       dataIndex: "_id",
+      render: (text, record) => (
+        <span>
+          {record.userId.name}
+        </span>)
     },
     {
       title: "Date & Time",
@@ -64,6 +72,19 @@ const DoctorAppointments = () => {
           {moment(record.date).format("DD-MM-YYYY")} &nbsp;
           {moment(record.time).format("HH:mm")}
         </span>
+      ),
+    },
+    {
+      title: "Paid",
+      dataIndex: "paid",
+      render: (text, record) => (
+        <>
+          {record.paid === false ? (
+            <Tag color="volcano">unpaid</Tag>
+          ) : (
+            <Tag color="green">paid</Tag>
+          )}
+        </>
       ),
     },
     {

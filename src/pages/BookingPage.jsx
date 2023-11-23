@@ -7,6 +7,7 @@ import logo from "../assets/logo.svg";
 import "../pages/login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
+import { useStripe } from "@stripe/react-stripe-js";
 
 const BookingPage = () => {
   const { user } = useSelector((state) => state.user);
@@ -35,13 +36,21 @@ const BookingPage = () => {
       console.log(error);
     }
   };
-  // ============ handle availiblity
+
+
+
+
+
   const handleAvailability = async () => {
     try {
       dispatch(showLoading());
       const res = await axios.post(
         "https://doc-finder.onrender.com/api/v1/user/booking-availbility",
-        { doctorId: params.doctorId, date, time },
+        {
+          doctorId: params.doctorId,
+          date: date,
+          time: time,
+        },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -61,7 +70,8 @@ const BookingPage = () => {
       console.log(error);
     }
   };
-  // =============== booking func
+
+  const stripe = useStripe();
   const handleBooking = async () => {
     try {
       setIsAvailable(true);
@@ -86,6 +96,13 @@ const BookingPage = () => {
         }
       );
       dispatch(hideLoading());
+
+      const result = await stripe.redirectToCheckout({
+        sessionId: res.data.id,
+      });
+      if (result.error) {
+        console.error(result.error.message);
+      }
       if (res.data.success) {
         message.success(res.data.message);
       }
@@ -94,6 +111,11 @@ const BookingPage = () => {
       console.log(error);
     }
   };
+
+
+  console.log(doctors)
+
+
 
   useEffect(() => {
     getUserData();
@@ -124,19 +146,21 @@ const BookingPage = () => {
                 </h4>
                 <div className="flex flex-column space-x-6 w-50">
                   <DatePicker
-                    aria-required={"true"}
-                    className=""
+                    className="m-2"
                     format="DD-MM-YYYY"
                     onChange={(value) => {
-                      setDate(moment(value).format("DD-MM-YYYY"));
+                      // Using moment.js to format the date
+                      const formattedDate = moment(value.$d).format("DD-MM-YYYY");
+
+                      setDate(formattedDate);
                     }}
                   />
                   <TimePicker
-                    aria-required={"true"}
                     format="HH:mm"
-                    className=""
+                    className="m-2"
                     onChange={(value) => {
-                      setTime(moment(value).format("HH:mm"));
+                      console.log(value)
+                      setTime(moment(value.$d).format("HH:mm"));
                     }}
                   />
                 </div>

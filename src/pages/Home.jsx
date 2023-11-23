@@ -19,11 +19,11 @@ const Home = () => {
   const handleSelect = (e) => {
     getValue(e.target.value?.toLowerCase());
   };
+
   const getUserData = async () => {
     try {
-      const res = await axios.post(
+      const res = await axios.get(
         "https://doc-finder.onrender.com/api/v1/user/getAllDoctors",
-        {},
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -53,9 +53,7 @@ const Home = () => {
 
   console.log(value);
 
-  // const matched = foods.filter((Food) =>
-  //   Food.catagory.toLowerCase().includes(search)
-  // );
+
   return (
     <div className="home">
       <Header />
@@ -75,7 +73,7 @@ const Home = () => {
           </button>
         </div>
 
-        <div className="grid 2xl:grid-cols-3 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 grid-cols-1 gap-4 ">
+        <div className="grid 2xl:grid-cols-3 xl:grid-cols-4 lg:grid-cols-5 md:grid-cols-2 grid-cols-1 gap-4 ">
           {doctors.map((doctor) => (
             <DoctorList doctor={doctor} />
           ))}
