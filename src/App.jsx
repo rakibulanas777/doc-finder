@@ -18,9 +18,13 @@ import DoctorAppointments from "./pages/doctor/DoctorAppointments";
 import Footer from "./pages/Footer";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import ProfileUser from "./pages/ProfileUser.jsx";
+import DoctorDashboard from "./pages/doctor/DoctorDashboard.jsx";
+import { useState } from "react";
 
 function App() {
   const stripePromise = loadStripe('pk_test_51LM2J1SIiDyURhxDNv1N4eG5FI9FdphG6ukPj3hrrSo6UWrgbl6o0nJqOwemWcbqjlKNBR8nqhl6rnfzz8VK2Sjx00y47ErW1D');
+  const [doctor, setDoctor] = useState(null);
   return (
     <>
       <div data-theme="mytheme">
@@ -55,7 +59,23 @@ function App() {
             path="/doctor/profile/:id"
             element={
               <ProtectedRoute>
-                <Profile />
+                <Profile setDoctor={setDoctor} doctor={doctor} />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <DoctorDashboard doctor={doctor} />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile/:id"
+            element={
+              <ProtectedRoute>
+                <ProfileUser />
               </ProtectedRoute>
             }
           />

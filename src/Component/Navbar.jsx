@@ -32,6 +32,11 @@ const Navbar = () => {
       path: "/appointment",
     },
     {
+      name: "Profile",
+      id: 2,
+      path: `/profile/${user?.user?._id}`
+    },
+    {
       name: "Apply Doctor",
       id: 4,
       path: "/applydoctor",
@@ -47,6 +52,11 @@ const Navbar = () => {
       name: "Appointment",
       id: 1,
       path: "/doctor/appoinment",
+    },
+    {
+      name: "Dashboard",
+      id: 2,
+      path: "/dashboard",
     },
 
     {
@@ -95,21 +105,21 @@ const Navbar = () => {
               <>
                 {user.user.isAdmin
                   ? navItemAdmin.map((item) => (
-                      <NavLink
-                        key={item.id}
-                        to={item.path}
-                        onClick={() => setActive(item.id)}
-                        className={
-                          active === item.id
-                            ? "cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-primary"
-                            : "cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-neutral hover:text-primary"
-                        }
-                      >
-                        {item.name}
-                      </NavLink>
-                    ))
+                    <NavLink
+                      key={item.id}
+                      to={item.path}
+                      onClick={() => setActive(item.id)}
+                      className={
+                        active === item.id
+                          ? "cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-primary"
+                          : "cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-neutral hover:text-primary"
+                      }
+                    >
+                      {item.name}
+                    </NavLink>
+                  ))
                   : user.user.isDoctor
-                  ? navItemDoctor.map((item) => (
+                    ? navItemDoctor.map((item) => (
                       <NavLink
                         key={item.id}
                         to={item.path}
@@ -123,7 +133,7 @@ const Navbar = () => {
                         {item.name}
                       </NavLink>
                     ))
-                  : navItem.map((item) => (
+                    : navItem.map((item) => (
                       <NavLink
                         key={item.id}
                         to={item.path}
@@ -212,33 +222,33 @@ const Navbar = () => {
                 <>
                   {user.user.isAdmin
                     ? navItemAdmin.map((item) => (
-                        <NavLink
-                          key={item.id}
-                          to={item.path}
-                          onClick={() => setActive(item.id)}
-                          className={
-                            active === item.id
-                              ? "cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-primary"
-                              : "cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-neutral hover:text-primary"
-                          }
-                        >
-                          {item.name}
-                        </NavLink>
-                      ))
+                      <NavLink
+                        key={item.id}
+                        to={item.path}
+                        onClick={() => setActive(item.id)}
+                        className={
+                          active === item.id
+                            ? "cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-primary"
+                            : "cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-neutral hover:text-primary"
+                        }
+                      >
+                        {item.name}
+                      </NavLink>
+                    ))
                     : navItem.map((item) => (
-                        <NavLink
-                          key={item.id}
-                          to={item.path}
-                          onClick={() => setActive(item.id)}
-                          className={
-                            active === item.id
-                              ? "cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-primary"
-                              : "cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-neutral hover:text-primary"
-                          }
-                        >
-                          {item.name}
-                        </NavLink>
-                      ))}
+                      <NavLink
+                        key={item.id}
+                        to={item.path}
+                        onClick={() => setActive(item.id)}
+                        className={
+                          active === item.id
+                            ? "cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-primary"
+                            : "cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-neutral hover:text-primary"
+                        }
+                      >
+                        {item.name}
+                      </NavLink>
+                    ))}
                   <NavLink to="/profile">
                     <div className="cursor-pointer duration-1000 ease-out text-sm lg:text-base xl:text-base font-medium text-neutral">
                       {user.user.name}

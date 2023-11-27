@@ -38,9 +38,6 @@ const BookingPage = () => {
   };
 
 
-
-
-
   const handleAvailability = async () => {
     try {
       dispatch(showLoading());

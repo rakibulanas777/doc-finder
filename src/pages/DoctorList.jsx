@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PrimaryButton from "../Component/shared/PrimaryButton";
 import { useSelector } from "react-redux";
 import { FaHeart } from "react-icons/fa";
@@ -46,7 +46,9 @@ const DoctorList = ({ doctor }) => {
 
       <div className="card h-full bg-white w-full shadow-sm rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg  border p-3">
         <div className="relative mb-3">
-          <img src={doctor.image} />
+          <Link to={`/doctor/book-appointment/${doctor._id}`}>
+            <img src={doctor.image} className=" cursor-pointer" />
+          </Link>
           <div className="absolute top-2 right-2">
             <button className="shadow-sm text-white bg-green-500 hover:bg-green-700  cursor-pointer p-5  rounded-full  relative">
               <FaHeart className="absolute text-xl font-medium top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 " />

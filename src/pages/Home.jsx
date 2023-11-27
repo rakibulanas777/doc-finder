@@ -60,14 +60,14 @@ const Home = () => {
       <div className="container mx-auto py-24 px-10 sm:px-8 md:px-6 lg:px-10">
         <div className="flex items-center justify-between text-black  pb-8">
           <select
-            className="select w-full max-w-xs border bg-white"
+            className="select w-full max-w-xs border bg-gray-100 cursor-pointer focus:outline-0"
             onChange={handleSelect}
           >
             <option selected>All</option>
             <option>General Physician</option>
             <option>Dermatology</option>
           </select>
-          <button className="flex bg-white py-2 px-3 gap-2 items-center rounded-sm font-medium border-white">
+          <button className="flex bg-gray-100 cursor-pointer py-2 px-3 gap-2 items-center rounded-sm font-medium border-white">
             <span className=" font-medium">sort</span>
             {sort ? <AiOutlineArrowUp /> : <AiOutlineArrowDown />}
           </button>

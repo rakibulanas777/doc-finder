@@ -4,6 +4,7 @@ import axios from "axios";
 
 import moment from "moment";
 import { message, Table, Tag } from "antd";
+import { useSelector } from "react-redux";
 
 const DoctorAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -11,7 +12,7 @@ const DoctorAppointments = () => {
   const getAppointments = async () => {
     try {
       const res = await axios.get(
-        "https://doc-finder.onrender.com/api/v1/doctor/doctor-appointments",
+        "https://doc-finder.onrender.com/api/v1/doctor/doctor-appointments?status=all",
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -26,12 +27,36 @@ const DoctorAppointments = () => {
       console.log(error);
     }
   };
+  const { user } = useSelector((state) => state.user);
 
-  console.log(appointments)
+  const getApprovedAppointments = async () => {
+    try {
+      const res = await axios.post(
+        "https://doc-finder.onrender.com/api/v1/doctor/approved-appointments",
+        {
+          id: user._id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      if (res.data.success) {
+        console.log(res.data)
+
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
 
 
   useEffect(() => {
     getAppointments();
+    getApprovedAppointments()
   }, [appointments]);
 
   const handleStatus = async (record, status) => {

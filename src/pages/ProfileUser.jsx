@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate, NavLink } from "react-router-dom";
 import { Col, Form, Input, Row, TimePicker, message } from "antd";
-import logo from "../../assets/logo.svg";
-import "../applydoctor.css";
+import logo from "../assets/logo.svg";
+import "./applydoctor.css";
 import { useSelector, useDispatch } from "react-redux";
-import { showLoading, hideLoading } from "../../redux/features/alertSlice";
+import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import moment from "moment";
 
-const Profile = ({ doctor, setDoctor }) => {
+const ProfileUser = () => {
   const { user } = useSelector((state) => state.user);
-
+  const [User, setUser] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -20,14 +20,10 @@ const Profile = ({ doctor, setDoctor }) => {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        "https://doc-finder.onrender.com/api/v1/doctor/updateProfile",
+        "https://doc-finder.onrender.com/api/v1/user/updateUserProfile",
         {
           ...values,
           userId: user._id,
-          timings: [
-            moment(values.timings[0]).format("HH:mm"),
-            moment(values.timings[1]).format("HH:mm"),
-          ],
         },
         {
           headers: {
@@ -50,10 +46,10 @@ const Profile = ({ doctor, setDoctor }) => {
   };
 
   //getDOc Details
-  const getDoctorInfo = async () => {
+  const getUserInfo = async () => {
     try {
       const res = await axios.post(
-        "https://doc-finder.onrender.com/api/v1/doctor/getDoctorInfo",
+        "https://doc-finder.onrender.com/api/v1/user/getUserInfoController",
         { userId: params.id },
         {
           headers: {
@@ -62,32 +58,29 @@ const Profile = ({ doctor, setDoctor }) => {
         }
       );
       if (res.data.success) {
-        setDoctor(res.data.data);
+        setUser(res.data.data);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
+  console.log(User)
   useEffect(() => {
-    getDoctorInfo();
+    getUserInfo();
     //eslint-disable-next-line
-  }, []);
+  }, [User]);
   return (
     <>
       <div className="container mx-auto  px-10 sm:px-8 md:px-6 lg:px-10">
         <div className="w-full mx-auto pt-[20vh]">
-          {doctor && (
+          {User && (
             <Form
               layout="vertical"
               onFinish={handleFinish}
               className="ease-in duration-300 w-[80%] sm:w-[60%]  shadow-sm backdrop-blur-md bg-white/80 lg:w-[50%] mx-auto rounded-md px-8 py-5"
               initialValues={{
-                ...doctor,
-                timings: [
-                  moment(doctor.timings[0], "HH:mm"),
-                  moment(doctor.timings[1], "HH:mm"),
-                ],
+                ...User,
               }}
             >
               <NavLink to="/">
@@ -170,53 +163,10 @@ const Profile = ({ doctor, setDoctor }) => {
                     />
                   </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
-                  <Form.Item
-                    label="Specialization"
-                    name="specialization"
-                    required
-                    rules={[{ required: true }]}
-                  >
-                    <Input
-                      type="text"
-                      placeholder="your specialization"
-                      className="shadow-sm bg-white appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    />
-                  </Form.Item>
-                </Col>
-                <Col xs={24} md={8}>
-                  <Form.Item
-                    label="Experience"
-                    name="experience"
-                    required
-                    rules={[{ required: true }]}
-                  >
-                    <Input
-                      type="text"
-                      placeholder="your experience"
-                      className="shadow-sm bg-white appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    />
-                  </Form.Item>
-                </Col>
-                <Col xs={24} md={8}>
-                  <Form.Item
-                    label="Fees"
-                    name="feesPerConsaltation"
-                    required
-                    rules={[{ required: true }]}
-                  >
-                    <Input
-                      type="text"
-                      placeholder="your fees"
-                      className="shadow-sm bg-white appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    />
-                  </Form.Item>
-                </Col>
-                <Col xs={24} md={8}>
-                  <Form.Item label="Timings" name="timings" required>
-                    <TimePicker.RangePicker format="HH:mm" />
-                  </Form.Item>
-                </Col>
+
+
+
+
 
                 <Col xs={24} md={24}>
                   <button
@@ -235,4 +185,4 @@ const Profile = ({ doctor, setDoctor }) => {
   );
 };
 
-export default Profile;
+export default ProfileUser;
