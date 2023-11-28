@@ -51,7 +51,7 @@ const Home = () => {
     getUserData();
   }, [value]);
 
-  console.log(value);
+  console.log(doctors);
 
 
   return (

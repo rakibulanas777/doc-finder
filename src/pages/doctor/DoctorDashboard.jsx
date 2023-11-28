@@ -37,7 +37,7 @@ const DoctorDashboard = ({ doctor }) => {
     }
     const params = useParams();
     const [appointments, setAppointments] = useState([]);
-
+    const [revenue, setRevenue] = useState([])
     const getAppointments = async () => {
         try {
             const res = await axios.get(
@@ -60,13 +60,10 @@ const DoctorDashboard = ({ doctor }) => {
 
     console.log(doctor)
 
-    const getApprovedAppointments = async () => {
+    const getRevenue = async () => {
         try {
-            const res = await axios.post(
-                "https://doc-finder.onrender.com/api/v1/doctor/approved-appointments",
-                {
-                    id: user._id,
-                },
+            const res = await axios.get(
+                `https://doc-finder.onrender.com/api/v1/doctor/revenue`,
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -75,8 +72,7 @@ const DoctorDashboard = ({ doctor }) => {
             );
             if (res.data.success) {
                 console.log(res.data)
-
-
+                setRevenue(res.data);
             }
         } catch (error) {
             console.log(error);
@@ -108,9 +104,10 @@ const DoctorDashboard = ({ doctor }) => {
 
 
     useEffect(() => {
+        getRevenue()
         getAppointments();
 
-    }, [value]);
+    }, [value, revenue]);
 
 
     return (
@@ -120,10 +117,10 @@ const DoctorDashboard = ({ doctor }) => {
                     <div className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-black py-6">My Revenue</div>
                     <div className="grid  pb-14 md:grid-cols-2 grid-cols-2 gap-8">
                         <div className="bg-gray-500 py-4 cursor-default text-center text-white font-medium px-6 text-xl">
-                            Total Appoinment :{appointments?.totalAppointments}
+                            Total Appoinment :{revenue?.totalAppointments}
                         </div>
                         <div className="bg-gray-500 py-4 cursor-pointer text-center text-white font-medium px-6 text-xl">
-                            Earning: ${appointments?.totalRevenue}
+                            Earning: ${revenue?.totalRevenue}
                         </div>
 
                     </div>
@@ -157,10 +154,12 @@ const DoctorDashboard = ({ doctor }) => {
 
                                             <td>{appointment?.userId?.name}</td>
                                             <td>${appointment?.doctorInfo?.feesPerConsaltation}</td>
-
                                             {
-                                                <button className="mt-3 text-white btn btn-success btn-sm" onClick={() => markComplete(appointment._id)}>Complete</button>
+                                                appointment?.status !== 'complete' ? <button className="mt-3 text-white btn btn-success btn-sm" onClick={() => markComplete(appointment._id)}>Complete</button> : <button className="mt-3 text-white btn btn-error btn-sm">Completed</button>
                                             }
+                                            {/* {
+                                                <button className="mt-3 text-white btn btn-success btn-sm" onClick={() => markComplete(appointment._id)}>Complete</button>
+                                            } */}
                                         </tr>)
                                 }
 
